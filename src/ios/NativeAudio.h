@@ -25,6 +25,7 @@
 - (void) preloadSimple:(CDVInvokedUrlCommand *)command;
 - (void) preloadComplex:(CDVInvokedUrlCommand *)command;
 - (void) play:(CDVInvokedUrlCommand *)command;
+- (void) playSprite:(CDVInvokedUrlCommand *)command;
 - (void) stop:(CDVInvokedUrlCommand *)command;
 - (void) loop:(CDVInvokedUrlCommand *)command;
 - (void) unload:(CDVInvokedUrlCommand *)command;

@@ -54,6 +54,24 @@ static const CGFloat FADE_DELAY = 0.08;
     playIndex = playIndex % [voices count];
 }
 
+- (void) playSprite:(NSNumber*) stime playTime:(NSNumber*) ptime;
+{
+    AVAudioPlayer * player = [voices objectAtIndex:playIndex];
+    [player setCurrentTime:stime.floatValue];
+    player.numberOfLoops = 0;
+    [player play];
+    playIndex += 1;
+    playIndex = playIndex % [voices count];
+    dispatch_async(dispatch_get_main_queue(),^{
+    [NSTimer scheduledTimerWithTimeInterval:ptime.floatValue target:self selector:@selector(stopIndex:) userInfo:player repeats:NO];
+    });
+}
+
+- (void) stopIndex:(NSTimer*) timer;
+{
+        AVAudioPlayer * player = [timer userInfo];
+        [player stop];
+}
 
 // The volume is increased repeatedly by the fade step amount until the last step where the audio is stopped.
 // The delay determines how fast the decrease happens

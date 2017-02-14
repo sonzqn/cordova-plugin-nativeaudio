@@ -45,6 +45,14 @@ module.exports  = {
         
     },
 
+    playSprite: function(id, stime, ptime, successCallback, errorCallback, completeCallback) {
+        if(typeof completeCallback === "function") {
+            cordova.exec(completeCallback, errorCallback, "NativeAudio", "addCompleteListener", [id]);    
+        }
+        return cordova.exec(successCallback, errorCallback, "NativeAudio", "playSprite", [id,parseFloat(stime),parseFloat(ptime)]);
+        
+    },
+
     stop: function(id, successCallback, errorCallback) {
         return cordova.exec(successCallback, errorCallback, "NativeAudio", "stop", [id]);
     },
