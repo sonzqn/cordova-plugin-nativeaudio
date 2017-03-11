@@ -169,6 +169,10 @@ NSString* INFO_VOLUME_CHANGED = @"(NATIVE AUDIO) Volume changed.";
         if (existingReference == nil) {
             NSString* basePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"www"];
             NSString* path = [NSString stringWithFormat:@"%@/%@", basePath, assetPath];
+            if ([assetPath rangeOfString:@"file:"].location != NSNotFound) {
+                NSString* fileAssetPath  = [assetPath stringByReplacingOccurrencesOfString:@"file://" withString:@""];
+                path = fileAssetPath;
+            }
 
             if ([[NSFileManager defaultManager] fileExistsAtPath : path]) {
                 NativeAudioAsset* asset = [[NativeAudioAsset alloc] initWithPath:path
